@@ -1,0 +1,47 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+PUT test/core_user/1
+{
+  "id":1,
+  "name":"test",
+  "age":20,
+  "info":{
+    "mobile":"13322221111",
+    "email":"test@163.com"
+  }
+}
+
+POST test/core_user/1
+{
+  "id":1,
+  "name":"test",
+  "age":30,
+  "info":{
+    "mobile":"13322221111"
+  }
+}
+
+PUT test/core_user/T_PkoGYBJOaHUtSpXVM1
+{
+  "name":"haha",
+  "age":25,
+  "info":{
+    "mobile":"1231111222",
+    "email":"123@163.com"
+  }
+}
+
+GET test/core_user/T_PkoGYBJOaHUtSpXVM1
+
+GET test/core_user/_search
+
+
+GET test/core_user/_search?q=name:test+age:[20 TO 40]&sort=age:asc&from=2&size=5
+
+GET test/core_user/_search?q=name:test+age:[20 TO 40]&sort=age:asc&from=0&size=10&_source=id,name,age
+

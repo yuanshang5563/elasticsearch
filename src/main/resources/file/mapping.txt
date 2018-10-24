@@ -1,0 +1,75 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET _cat/indices?v
+
+GET _cluster/health?pretty=true
+
+GET /_cluster/health
+
+GET /_cat/shards
+
+GET /_cluster/settings
+
+PUT /test/_settings
+{
+    "index" : {
+        "number_of_replicas" : 0
+    }
+}
+
+GET test/_mapping/core_user
+
+DELETE test
+
+PUT test
+
+PUT test/_mapping/core_user
+{
+  "core_user":{
+    "properties":{
+      "id":{
+        "type":"keyword"
+      },
+      "name":{
+        "type":"text",
+        "analyzer":"ik_smart",
+        "search_analyzer":"ik_smart"
+      },
+      "birthday":{
+        "type":"date"
+      }
+    }
+  }
+}
+
+GET test/_mapping
+
+GET test/_mapping/core_user
+
+POST test/core_user
+{
+  "name":"我是一个中国人",
+  "birthday":"2014-11-13"
+}
+
+GET test/core_user/_search
+
+GET test/core_user/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": "中国人"
+          }
+        }
+      ]
+    }
+  }
+}

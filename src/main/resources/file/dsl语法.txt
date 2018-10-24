@@ -1,0 +1,31 @@
+GET test/core_user/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": "test"
+          }
+        }
+      ],
+      "filter": {
+        "range": {
+          "age": {
+            "gte": 10,
+            "lte": 50
+          }
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "age": {
+        "order": "asc"
+      }
+    }
+  ],
+  "from": 0, 
+  "size": 20
+}
